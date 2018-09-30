@@ -118,7 +118,7 @@ modules:
         commands:
           - export WINEARCH=win32
           - 
-          - if ! [ -e "${WINEPREFIX}/dosdevices/c:/Program Files (x86)/HappyFoto-Designer/HappyFoto-Designer.exe" ] ; then
+          - if ! [ -e "${WINEPREFIX}/dosdevices/c:/Program Files/HappyFoto-Designer/HappyFoto-Designer.exe" ] ; then
           - '    source /app/bin/happyfoto-designer-installer'
           - '    if [[ $? != 0 ]] ; then'
           - '        echo "Installation failed, abort."'
@@ -126,7 +126,7 @@ modules:
           - '    fi'
           - fi
           - 
-          - wine "C:/Program Files (x86)/HappyFoto-Designer/HappyFoto-Designer.exe" "{@:--SkipBuildPatchPrereq -opengl}"
+          - wine "C:/Program Files/HappyFoto-Designer/HappyFoto-Designer.exe" "{@:--SkipBuildPatchPrereq -opengl}"
       - type: file
         path: de.happyfoto.happyfoto.appdata.xml
       - type: file
