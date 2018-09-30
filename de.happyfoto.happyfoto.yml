@@ -59,6 +59,7 @@ modules:
   - name: HappyFoto-Designer
     only-arches:
       - i386
+      - x86_64
     buildsystem: simple
     build-commands:
       - install -d /app/bin
@@ -118,7 +119,7 @@ modules:
           - export WINEARCH=win32
           - 
           - if ! [ -e "${WINEPREFIX}/dosdevices/c:/Program Files (x86)/HappyFoto-Designer/HappyFoto-Designer.exe" ] ; then
-          - '    source /app/bin/HappyFoto-Designer'
+          - '    source /app/bin/happyfoto-designer-installer'
           - '    if [[ $? != 0 ]] ; then'
           - '        echo "Installation failed, abort."'
           - '        exit 1'
