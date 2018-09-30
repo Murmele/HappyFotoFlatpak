@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=HappyFoto-Designer
+Comment=
+Exec=HappyFoto-Designer %U
+StartupNotify=true
+Terminal=false
+Type=Application
+MimeType=application/x-ms-dos-executable;application/x-msi;application/x-ms-shortcut;
+Categories=
+Keywords=HappyFoto
