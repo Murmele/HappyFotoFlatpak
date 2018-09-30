@@ -110,7 +110,7 @@ modules:
           - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v shcore /d "" /f
           - 
           - echo "Installing application..."
-          - msiexec /i "${XDG_CACHE_HOME}/HappyFoto-Designer"
+          - wine "${XDG_CACHE_HOME}/HappyFoto-Designer.exe"
           - 
           - echo "Installer finished"
       - type: script
