@@ -85,7 +85,7 @@ modules:
           - '    exit 1'
           - fi
           - 
-          - if [ -e "${WINEPREFIX}/dosdevices/c:/Program Files (x86)/HappyFoto-Designer/HappyFoto-Designer.exe" ] ; then
+          - if [ -e "${WINEPREFIX}/dosdevices/c:/Program Files/HappyFoto-Designer/HappyFoto-Designer.exe" ] ; then
           - '    echo "This prefix already has an exisiting ''HappyFoto-Designer'' install at ${WINEPREFIX}"'
           - '    echo "In order to install ''HappyFoto-Designer'' you must move or delete the current prefix."'
           - '    exit 1'
