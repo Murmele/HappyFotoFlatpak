@@ -1,0 +1,151 @@
+app-id: de.happyfoto.happyfoto
+branch: stable
+
+runtime: org.winepak.Platform
+runtime-version: 3.0
+sdk: org.winepak.Sdk
+
+command: HappyFoto-Designer
+rename-icon: "EC35_Loader.0"
+
+add-extensions:
+  org.winepak.Platform.Compat32:
+    directory: lib/32bit
+    version: 3.0
+    add-ld-path: lib
+    no-autodownload: false
+    
+  org.winepak.Platform.Wine:
+    directory: lib/wine
+    version: 3.9-staging
+    add-ld-path: lib
+    no-autodownload: false
+    
+  org.winepak.Platform.Wine.Compat32:
+    directory: lib/wine-32bit
+    version: 3.9-staging
+    add-ld-path: lib
+    no-autodownload: false
+    
+tags:
+  - proprietary
+
+finish-args:
+  - --socket=x11
+  - --socket=pulseaudio
+  - --share=ipc
+  - --share=network
+  - --device=dri
+  - --allow=multiarch
+  - --allow=devel
+    
+modules:
+  - name: setup-compat32
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/lib/32bit
+      - ln -s /app/lib/32bit/lib/ld-linux.so.2 /app/lib/ld-linux.so.2
+    
+  - name: setup-wine
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/lib/wine
+    
+  - name: setup-wine-compat32
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/lib/wine-32bit
+    
+  - name: HappyFoto-Designer
+    only-arches:
+      - i386
+    buildsystem: simple
+    build-commands:
+      - install -d /app/bin
+      - install happyfoto-designer-installer /app/bin
+      - install HappyFoto-Designer /app/bin
+      - install -Dm644 de.happyfoto.happyfoto.appdata.xml /app/share/appdata/de.happyfoto.happyfoto.appdata.xml
+      - install -Dm644 de.happyfoto.happyfoto.desktop /app/share/applications/de.happyfoto.happyfoto.desktop
+      - install -Dm644 16x16.png /app/share/icons/hicolor/16x16/apps/EC35_Loader.0.png
+      - install -Dm664 24x24.png /app/share/icons/hicolor/24x24/apps/de.happyfoto.happyfoto.png
+      - install -Dm664 32x32.png /app/share/icons/hicolor/32x32/apps/de.happyfoto.happyfoto.png
+      - install -Dm664 48x48.png /app/share/icons/hicolor/48x48/apps/de.happyfoto.happyfoto.png
+      - install -Dm664 64x64.png /app/share/icons/hicolor/64x64/apps/de.happyfoto.happyfoto.png
+      - install -Dm664 72x72.png /app/share/icons/hicolor/72x72/apps/de.happyfoto.happyfoto.png
+      - install -Dm664 80x80.png /app/share/icons/hicolor/80x80/apps/de.happyfoto.happyfoto.png
+      - install -Dm664 96x96.png /app/share/icons/hicolor/96x96/apps/de.happyfoto.happyfoto.png
+      - install -Dm664 128x128.png /app/share/icons/hicolor/128x128/apps/de.happyfoto.happyfoto.png
+    sources:
+      - type: script
+        dest-filename: happyfoto-designer-installer
+        commands:
+          - if [ -z "$WINEPREFIX" ] ; then
+          - '    echo "No wine prefix set or is empty, abort."'
+          - '    exit 1'
+          - fi
+          - 
+          - if [ -e "${WINEPREFIX}/dosdevices/c:/Program Files (x86)/HappyFoto-Designer/HappyFoto-Designer.exe" ] ; then
+          - '    echo "This prefix already has an exisiting ''HappyFoto-Designer'' install at ${WINEPREFIX}"'
+          - '    echo "In order to install ''HappyFoto-Designer'' you must move or delete the current prefix."'
+          - '    exit 1'
+          - fi
+          - 
+          - echo "Downloading installer..."
+          - curl -L --progress-bar --output "${XDG_CACHE_HOME}/HappyFoto-Designer.exe" "https://downloads.poi.de/HappyFoto/Windows/DE/HappyFoto-Designer.exe"
+          - 
+          - echo "Setting-up wine prefix..."
+          - wineboot
+          - 
+          - echo "Installing Extension(s)..."
+          - 
+          - echo "Performing tweak(s)..."
+          - echo "Disable winemenubuilder.exe..."
+          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v winemenubuilder.exe /d '' /f
+          -
+          - echo "Set Windows Version to win10"
+          - wine reg add 'HKEY_CURRENT_USER\Software\Wine' /v Version /d win10 /f
+          - 
+          - echo "Disable shcore"
+          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v shcore /d "" /f
+          - 
+          - echo "Installing application..."
+          - msiexec /i "${XDG_CACHE_HOME}/HappyFoto-Designer"
+          - 
+          - echo "Installer finished"
+      - type: script
+        dest-filename: HappyFoto-Designer
+        commands:
+          - export WINEARCH=win32
+          - 
+          - if ! [ -e "${WINEPREFIX}/dosdevices/c:/Program Files (x86)/HappyFoto-Designer/HappyFoto-Designer.exe" ] ; then
+          - '    source /app/bin/HappyFoto-Designer'
+          - '    if [[ $? != 0 ]] ; then'
+          - '        echo "Installation failed, abort."'
+          - '        exit 1'
+          - '    fi'
+          - fi
+          - 
+          - wine "C:/Program Files (x86)/HappyFoto-Designer/HappyFoto-Designer.exe" "{@:--SkipBuildPatchPrereq -opengl}"
+      - type: file
+        path: de.happyfoto.happyfoto.appdata.xml
+      - type: file
+        path: de.happyfoto.happyfoto.desktop
+      - type: file
+        path: icons/hicolor/16x16/16x16.png
+      - type: file
+        path: icons/hicolor/24x24/24x24.png
+      - type: file
+        path: icons/hicolor/32x32/32x32.png
+      - type: file
+        path: icons/hicolor/48x48/48x48.png
+      - type: file
+        path: icons/hicolor/64x64/64x64.png
+      - type: file
+        path: icons/hicolor/72x72/72x72.png
+      - type: file
+        path: icons/hicolor/80x80/80x80.png
+      - type: file
+        path: icons/hicolor/96x96/96x96.png
+      - type: file
+        path: icons/hicolor/128x128/128x128.png
+
