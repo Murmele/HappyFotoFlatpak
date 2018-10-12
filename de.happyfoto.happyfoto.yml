@@ -6,7 +6,6 @@ runtime-version: 3.0
 sdk: org.winepak.Sdk
 
 command: HappyFoto-Designer
-rename-icon: "EC35_Loader.0"
 
 add-extensions:
   org.winepak.Platform.Compat32:
@@ -44,7 +43,7 @@ modules:
       - export CC="gcc -m32"
       - export CXX="g++ -m32"
       - export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
-      - ./nss-mdns-0.10/configure --prefix=/app/usr --sysconfdir=/etc --localstatedir=/app/var --libdir=/app/usr/lib32 --disable-lynx
+      - ./configure --prefix=/app/usr --sysconfdir=/etc --localstatedir=/app/var --libdir=/app/usr/lib32 --disable-lynx
       - make
       - make DESTDIR="/app" install
     sources:
