@@ -12,5 +12,6 @@ https://www.happyfoto.de/
 	flatpak install winepak org.winepak.Sdk/i386/3.0
 
 ### Happy Foto
-    flatpak-builder --arch=i386 --force-clean builds --repo=winepak de.happyfoto.happyfoto.yml
-    flatpak --user install winepak de.happyfoto.happyfoto
+    flatpak-builder --repo=HappyFotoRepo --force-clean HappyFoto de.happyfoto.happyfoto.yml
+	flatpak remote-add HappyFotoRepo HappyFotoRepo --no-gpg-verify
+	flatpak install HappyFotoRepo de.happyfoto.happyfoto
