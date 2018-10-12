@@ -69,7 +69,6 @@ modules:
     
   - name: HappyFoto-Designer
     only-arches:
-      - i386
       - x86_64
     buildsystem: simple
     build-commands:
@@ -127,7 +126,7 @@ modules:
       - type: script
         dest-filename: HappyFoto-Designer
         commands:
-          - export WINEARCH=win32
+          - export WINEARCH=win64
           - 
           - if ! [ -e "${WINEPREFIX}/dosdevices/c:/Program Files/HappyFoto-Designer/HappyFoto-Designer.exe" ] ; then
           - '    source /app/bin/happyfoto-designer-installer'
