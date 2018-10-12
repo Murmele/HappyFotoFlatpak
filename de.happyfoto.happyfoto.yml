@@ -76,7 +76,6 @@ modules:
       - install happyfoto-designer-installer /app/bin
       - install HappyFoto-Designer /app/bin
       - install ie8-installer /app/bin
-      - install ie8 /app/bin
       - install -Dm644 de.happyfoto.happyfoto.appdata.xml /app/share/metainfo/de.happyfoto.happyfoto.appdata.xml
       - install -Dm644 de.happyfoto.happyfoto.desktop /app/share/applications/de.happyfoto.happyfoto.desktop
       - install -Dm644 16x16.png /app/share/icons/hicolor/16x16/apps/de.happyfoto.happyfoto.png
@@ -107,79 +106,76 @@ modules:
           - '    exit 1'
           - fi
           - 
-          - if [ -e "${WINEPREFIX}/dosdevices/c:/Program Files/Internet Explorer" ] ; then
+          - if [ -e "${WINEPREFIX}/dosdevices/c:/Program Files (x86)/Internet Explorer" ] ; then
           - '    echo "This prefix already has an exisiting ''Internet Explorer 8'' install at ${WINEPREFIX}"'
           - '    echo "In order to install ''Internet Explorer 8'' you must move or delete the current prefix."'
           - '    exit 1'
           - fi
           - 
-          - echo "Setting-up wine prefix..."
-          - wineboot
-          - 
           - echo "Installing Extension(s)..."
           - 
           - echo "Performing tweak(s)..."
           - echo "Disable winemenubuilder.exe..."
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v winemenubuilder.exe /d '' /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v winemenubuilder.exe /d '' /f
           -
           - echo "Clear Windows Version"
-          - wine reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion' /v SubVersionNumber /f
-          - wine reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion' /v VersionNumber /f
-          - wine reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CSDVersion /f
-          - wine reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /f
-          - wine reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /f
-          - wine reg delete 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /f
-          - wine reg delete 'HKLM\System\CurrentControlSet\Control\ServiceCurrent' /v OS /f
-          - wine reg delete 'HKLM\System\CurrentControlSet\Control\Windows' /v CSDVersion /f
-          - wine reg delete 'HKCU\Software\Wine' /v Version /f
-          - wine reg delete 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion' /v SubVersionNumber /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion' /v VersionNumber /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CSDVersion /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /f
+          - wine64 reg delete 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /f
+          - wine64 reg delete 'HKLM\System\CurrentControlSet\Control\ServiceCurrent' /v OS /f
+          - wine64 reg delete 'HKLM\System\CurrentControlSet\Control\Windows' /v CSDVersion /f
+          - wine64 reg delete 'HKCU\Software\Wine' /v Version /f
+          - wine64 reg delete 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /f
           - 
           - echo "Set Windows Version to Vista"
-          - wine reg add 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /d 'WinNT' /f
-          - wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CSDVersion /d 'Service Pack 2' /f
-          - wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /d '6002' /f
-          - wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /d '6.0' /f
-          - wine reg add 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Windows' /v CSDVersion /t REG_DWORD /d 00000200 /
+          - wine64 reg add 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /d 'WinNT' /f
+          - wine64 reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CSDVersion /d 'Service Pack 2' /f
+          - wine64 reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /d '6002' /f
+          - wine64 reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /d '6.0' /f
+          - wine64 reg add 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Windows' /v CSDVersion /t REG_DWORD /d 00000200 /
           - 
           - echo "Clear Windows Version"
-          - wine reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion' /v SubVersionNumber /f
-          - wine reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion' /v VersionNumber /f
-          - wine reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CSDVersion /f
-          - wine reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /f
-          - wine reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /f
-          - wine reg delete 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /f
-          - wine reg delete 'HKLM\System\CurrentControlSet\Control\ServiceCurrent' /v OS /f
-          - wine reg delete 'HKLM\System\CurrentControlSet\Control\Windows' /v CSDVersion /f
-          - wine reg delete 'HKCU\Software\Wine' /v Version /f
-          - wine reg delete 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion' /v SubVersionNumber /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion' /v VersionNumber /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CSDVersion /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /f
+          - wine64 reg delete 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /f
+          - wine64 reg delete 'HKLM\System\CurrentControlSet\Control\ServiceCurrent' /v OS /f
+          - wine64 reg delete 'HKLM\System\CurrentControlSet\Control\Windows' /v CSDVersion /f
+          - wine64 reg delete 'HKCU\Software\Wine' /v Version /f
+          - wine64 reg delete 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /f
           - 
           - echo "Set Windows Version to Vista"
-          - wine reg add 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /d 'WinNT' /f
-          - wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CSDVersion /d 'Service Pack 2' /f
-          - wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /d '6002' /f
-          - wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /d '6.0' /f
-          - wine reg add 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Windows' /v CSDVersion /t REG_DWORD /d 00000200 /f
+          - wine64 reg add 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /d 'WinNT' /f
+          - wine64 reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CSDVersion /d 'Service Pack 2' /f
+          - wine64 reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /d '6002' /f
+          - wine64 reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /d '6.0' /f
+          - wine64 reg add 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Windows' /v CSDVersion /t REG_DWORD /d 00000200 /f
           - 
-          - source /app/lib/extension/msls31/bin/msls31-install32
+          - source /app/lib/extension/msls31/bin/msls31-install64
           - 
           - echo "Override DLLs"
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v itircl /d native,builtin /f
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v itss /d native,builtin /f
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v jscript /d native,builtin /f
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v msctf /d native,builtin /f
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v mshtml /d native,builtin /f
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v shdoclc /d native,builtin /f
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v shdocvw /d native,builtin /f
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v shlwapi /d native,builtin /f
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v urlmon /d native,builtin /f
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v wininet /d native,builtin /f
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v xmllite /d native,builtin /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v itircl /d native,builtin /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v itss /d native,builtin /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v jscript /d native,builtin /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v msctf /d native,builtin /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v mshtml /d native,builtin /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v shdoclc /d native,builtin /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v shdocvw /d native,builtin /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v shlwapi /d native,builtin /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v urlmon /d native,builtin /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v wininet /d native,builtin /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v xmllite /d native,builtin /f
           - 
           - echo "Override iexplorer.exe"
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v iexplore.exe /d native /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v iexplore.exe /d native /f
           - 
           - echo "Override updspapi"
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v updspapi /d builtin /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v updspapi /d builtin /f
           - 
           - echo "Remove builtin iexplore.exe"
           - if [ -f "${WINEPREFIX}/dosdevices/c:/Program Files (x86)/Internet Explorer/iexplore.exe" ] ; then
@@ -197,42 +193,25 @@ modules:
           - done
           - 
           - echo "Installing application..."
-          - wine "/app/extra/ie8-installer.exe" #"/quiet"
+          - wine64 "/app/extra/ie8-installer.exe" #"/quiet"
           - 
           - # https://bugs.winehq.org/show_bug.cgi?id=25648
           - echo "Avoid hang, set TabProcGrowth=0"
-          - wine reg add 'HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main' /v TabProcGrowth /t REG_DWORD /d 00000000 /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main' /v TabProcGrowth /t REG_DWORD /d 00000000 /f
           - 
           - echo "Clear Windows Version"
-          - wine reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion' /v SubVersionNumber /f
-          - wine reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion' /v VersionNumber /f
-          - wine reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CSDVersion /f
-          - wine reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /f
-          - wine reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /f
-          - wine reg delete 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /f
-          - wine reg delete 'HKLM\System\CurrentControlSet\Control\ServiceCurrent' /v OS /f
-          - wine reg delete 'HKLM\System\CurrentControlSet\Control\Windows' /v CSDVersion /f
-          - wine reg delete 'HKCU\Software\Wine' /v Version /f
-          - wine reg delete 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion' /v SubVersionNumber /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion' /v VersionNumber /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CSDVersion /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /f
+          - wine64 reg delete 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /f
+          - wine64 reg delete 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /f
+          - wine64 reg delete 'HKLM\System\CurrentControlSet\Control\ServiceCurrent' /v OS /f
+          - wine64 reg delete 'HKLM\System\CurrentControlSet\Control\Windows' /v CSDVersion /f
+          - wine64 reg delete 'HKCU\Software\Wine' /v Version /f
+          - wine64 reg delete 'HKLM\System\CurrentControlSet\Control\ProductOptions' /v ProductType /f
           - 
           - echo "Installer finished"
-
-      - type: script
-        only-arches:
-          - x86_64
-        dest-filename: ie8
-        commands:
-          - export WINEARCH=win32
-          - 
-          - if ! [ -e "${WINEPREFIX}/dosdevices/c:/Program Files/Internet Explorer" ] ; then
-          - '    source /app/bin/ie8-installer'
-          - '    if [[ $? != 0 ]] ; then'
-          - '        echo "Installation failed, abort."'
-          - '        exit 1'
-          - '    fi'
-          - fi
-          - 
-          - wine "C:\Program Files\Internet Explorer\iexplore.exe"
       - type: script
         dest-filename: happyfoto-designer-installer
         commands:
@@ -241,7 +220,7 @@ modules:
           - '    exit 1'
           - fi
           - 
-          - if [ -e "${WINEPREFIX}/dosdevices/c:/Program Files/HappyFoto-Designer/HappyFoto-Designer.exe" ] ; then
+          - if [ -e "${WINEPREFIX}/dosdevices/c:/Program Files (x86)/HappyFoto-Designer/HappyFoto-Designer.exe" ] ; then
           - '    echo "This prefix already has an exisiting ''HappyFoto-Designer'' install at ${WINEPREFIX}"'
           - '    echo "In order to install ''HappyFoto-Designer'' you must move or delete the current prefix."'
           - '    exit 1'
@@ -257,16 +236,16 @@ modules:
           - 
           - echo "Performing tweak(s)..."
           - echo "Disable winemenubuilder.exe..."
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v winemenubuilder.exe /d '' /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v winemenubuilder.exe /d '' /f
           -
           - echo "Set Windows Version to win10"
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine' /v Version /d win10 /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine' /v Version /d win10 /f
           - 
           - echo "Disable shcore"
-          - wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v shcore /d "" /f
+          - wine64 reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v shcore /d "" /f
           - 
           - echo "Installing application..."
-          - wine "${XDG_CACHE_HOME}/HappyFoto-Designer.exe"
+          - wine64 "${XDG_CACHE_HOME}/HappyFoto-Designer.exe"
           - 
           - echo "Installer finished"
 
@@ -274,23 +253,16 @@ modules:
       - type: script
         dest-filename: HappyFoto-Designer
         commands:
-          - export WINEARCH=win32
+          - export WINEARCH=win64
           - 
-          - if ! [ -e "${WINEPREFIX}/dosdevices/c:/Program Files/HappyFoto-Designer/HappyFoto-Designer.exe" ] ; then
+          - if ! [ -e "${WINEPREFIX}/dosdevices/c:/Program Files (x86)/HappyFoto-Designer/HappyFoto-Designer.exe" ] ; then
           - '    source /app/bin/happyfoto-designer-installer'
           - '    if [[ $? != 0 ]] ; then'
           - '        echo "Installation failed, abort."'
           - '        exit 1'
           - '    fi'
           - fi
-          - if ! [ -e "${WINEPREFIX}/dosdevices/c:/Program Files/Internet Explorer/iexplore.exe" ] ; then
-          - '    source /app/bin/ie8-installer'
-          - '    if [[ $? != 0 ]] ; then'
-          - '        echo "Installation failed, abort."'
-          - '        exit 1'
-          - '    fi'
-          - fi
-          - wine "C:/Program Files/HappyFoto-Designer/HappyFoto-Designer.exe" "{@:--SkipBuildPatchPrereq -opengl}"
+          - wine64 "C:/Program Files (x86)/HappyFoto-Designer/HappyFoto-Designer.exe" "{@:--SkipBuildPatchPrereq -opengl}"
       - type: file
         path: de.happyfoto.happyfoto.appdata.xml
       - type: file
