@@ -106,12 +106,6 @@ modules:
           - '    exit 1'
           - fi
           - 
-          - if [ -e "${WINEPREFIX}/dosdevices/c:/Program Files (x86)/Internet Explorer" ] ; then
-          - '    echo "This prefix already has an exisiting ''Internet Explorer 8'' install at ${WINEPREFIX}"'
-          - '    echo "In order to install ''Internet Explorer 8'' you must move or delete the current prefix."'
-          - '    exit 1'
-          - fi
-          - 
           - echo "Installing Extension(s)..."
           - 
           - echo "Performing tweak(s)..."
@@ -193,7 +187,7 @@ modules:
           - done
           - 
           - echo "Installing application..."
-          - wine64 "/app/extra/ie8-installer.exe" #"/quiet"
+          - wine64 "${XDG_CACHE_HOME}/ie8-installer.exe" #"/quiet"
           - 
           - # https://bugs.winehq.org/show_bug.cgi?id=25648
           - echo "Avoid hang, set TabProcGrowth=0"
@@ -248,7 +242,7 @@ modules:
           - wine64 "${XDG_CACHE_HOME}/HappyFoto-Designer.exe"
           - 
           - echo "Installer finished"
-
+          - source /app/bin/ie8-installer
 
       - type: script
         dest-filename: HappyFoto-Designer
