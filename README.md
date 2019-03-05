@@ -10,6 +10,7 @@ https://www.happyfoto.de/
     flatpak remote-add --if-not-exists winepak https://dl.winepak.org/repo/winepak.flatpakrepo
 	flatpak install winepak org.winepak.Platform/i386/3.0
 	flatpak install winepak org.winepak.Sdk/i386/3.0
+	flatpak install winepak org.winepak.Platform.Extension.d3dx9
 
 ### Happy Foto
     flatpak-builder --repo=HappyFotoRepo --force-clean HappyFoto de.happyfoto.happyfoto.yml

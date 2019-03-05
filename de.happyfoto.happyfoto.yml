@@ -26,6 +26,11 @@ add-extensions:
     add-ld-path: lib
     no-autodownload: false
     
+  org.winepak.Platform.Extension.d3dx9:
+    directory: lib/extension/d3dx9
+    version: 3.0
+    no-autodownload: false
+    
 tags:
   - proprietary
 
@@ -35,6 +40,9 @@ finish-args:
   - --share=network
   - --device=dri
   - --allow=multiarch
+  - --filesystem=home
+  - --filesystem=~/HappyFoto-Designer:create
+  - --filesystem=xdg-documents
     
 modules:
   - name: lib32-nss-mdns
@@ -66,6 +74,11 @@ modules:
     buildsystem: simple
     build-commands:
       - mkdir -p /app/lib/wine-32bit
+    
+  - name: setup
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/lib/extension/d3dx9
     
   - name: HappyFoto-Designer
     only-arches:
